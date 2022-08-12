@@ -3,6 +3,7 @@
     <app-search (search$)="onSearch($event)"></app-search>
 
     <app-unicorn-table
+    (rowClicked)="showDetails($event)"
       [columns]="columns"
       [entries]="entries$ | async"
       [isLoading]="isLoading"

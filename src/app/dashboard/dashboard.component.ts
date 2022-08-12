@@ -3,8 +3,9 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
 import { SiteTitleService } from '@red-probeaufgabe/core';
 import { FhirSearchFn, IFhirPatient, IFhirPractitioner, IFhirSearchResponse } from '@red-probeaufgabe/types';
-import { IUnicornTableColumn } from '@red-probeaufgabe/ui';
+import { DialogDetailRowComponent, IUnicornTableColumn } from '@red-probeaufgabe/ui';
 import { AbstractSearchFacadeService } from '@red-probeaufgabe/search';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,7 +51,9 @@ export class DashboardComponent {
     startWith(0),
   );
 
-  constructor(private siteTitleService: SiteTitleService, private searchFacade: AbstractSearchFacadeService) {
+  constructor(private siteTitleService: SiteTitleService, 
+    private dialog: MatDialog,
+    private searchFacade: AbstractSearchFacadeService) {
     this.siteTitleService.setSiteTitle('Dashboard');
   }
 
@@ -63,5 +66,15 @@ export class DashboardComponent {
 
   private handleError(): Observable<IFhirSearchResponse<IFhirPatient | IFhirPractitioner>> {
     return of({ entry: [], total: 0 });
+  }
+
+  showDetails(row) {
+    this.dialog.open(DialogDetailRowComponent, {
+      data: {
+        entry: row
+      },
+      maxHeight: '200px',
+      maxWidth: '50%'
+    })
   }
 }

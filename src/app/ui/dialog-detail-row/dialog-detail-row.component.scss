@@ -1,10 +1,15 @@
 .detail-row {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  gap: 1em;
 
   .label {
     font-weight: 500;
   }
+}
+
+.dialog-content {
+  display: grid;
+  gap: 1em;
 }

@@ -1,6 +1,7 @@
-<div class="detail-row">
-  <div class="label">{{ label }}:</div>
-  <div class="value">
-    {{ data }}
+<h2 mat-dialog-title>Details View</h2>
+<div mat-dialog-content class="dialog-content">
+  <div class="detail-row" *ngFor="let property of (displayData) | keyvalue">
+    <span>{{ property.key }}</span>
+    <span>{{ property.value | json }}</span>
   </div>
 </div>

@@ -1,8 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { IUnicornTableColumn } from '../models';
 import { IFhirPatient, IFhirPractitioner } from '@red-probeaufgabe/types';
+import { EventEmitter } from '@angular/core';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-unicorn-table',
@@ -21,6 +23,8 @@ export class UnicornTableComponent implements OnInit {
   set entries(value: Array<IFhirPatient | IFhirPractitioner>) {
     this.dataSource.data = value;
   }
+
+  @Output() rowClicked = new EventEmitter();
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
