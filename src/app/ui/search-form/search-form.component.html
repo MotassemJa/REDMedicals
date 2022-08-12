@@ -1,1 +1,18 @@
-<!-- implement search form here -->
+<form [formGroup]="searchForm" class="form">
+    
+    <mat-form-field class="search-input">
+        <mat-label></mat-label>
+        <input formControlName="term" matInput>
+        <mat-error *ngIf="searchTermFormControl.invalid">Ungueltiges Format</mat-error>
+  </mat-form-field>
+
+  
+  <mat-form-field class="select-input">
+    <mat-label>Profile</mat-label>
+    <mat-select formControlName="profile">
+      <mat-option *ngFor="let filter of profileFilterOptions" [value]="filter">
+        {{ filter }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
